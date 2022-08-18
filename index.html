@@ -15,7 +15,7 @@
         }
         .wrapper {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1100px;
         }
         .session-content {
             display: flex;
@@ -28,7 +28,7 @@
         }
         .empathy-story {
             border: 1px solid #D6A2FE;
-            color: #151118   ;
+            color: #151118;
         }
         .empathy {
             color: #BA62FC;
@@ -53,6 +53,7 @@
             display: flex;
             justify-content: flex-end;
             color:#151118;
+            text-decoration: none;
         }
 
         .fa-arrow-right {
@@ -69,21 +70,7 @@
                 <div class="session">
                     <h2 class="session-title empathy">Empathy</h2>
                     <div class="session-content">
-                        <!-- <div class="each-story empathy-story">
-                            <img class="thumbnail" src="https://www.clipartmax.com/png/middle/422-4227601_dollar-store-products-from-vineland-syrup-dollar-store-transparent.png" />
-                            <h3 class="title">Dollar Tree store</h3>
-                            <span class="brief">Stella came with her mom into a store that everything is only one dollar...</span>
-                        </div>
-                        <div class="each-story empathy-story">
-                            <img class="thumbnail" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT72exheX0ukejho9kJBPm02P-2g8X459TdOUB9eKq2WMnBDBkLN-V3sOcnD8hMc_jyo88&usqp=CAU" />
-                            <h3 class="title">Lineal</h3>
-                            <span class="brief">Lineal is the only guard who takes care of the ranch...</span>
-                        </div>
-                        <div class="each-story empathy-story">
-                            <img class="thumbnail"  src="https://media.istockphoto.com/vectors/riding-a-bicycle-vector-id165670255?k=20&m=165670255&s=612x612&w=0&h=COxALPHxtKp9GlCC0vVIGm0M1j6AmllgwDzUaWnkZRs=" />
-                            <h3 class="title">A female biker finished 36 miles</h3>
-                            <span class="brief">Stella came with her mom into a store that everything is only one dollar...</span>
-                        </div> -->
+                        
                     </div>
                 </div>
             </div>
@@ -112,7 +99,8 @@
                 brief.innerHTML = story.description_short;
                 eachStory.appendChild(brief);
 
-                const arrow = document.createElement('div');
+                const arrow = document.createElement('a');
+                arrow.href = `story.html?id=${story.id}`
                 arrow.setAttribute('class', 'arrow');
                 arrow.innerHTML = '<i class="fas fa-arrow-right"></i>'
                 eachStory.appendChild(arrow);

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <style>
+        .container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 800px;
+            padding: 60px 0;
+            line-height: 170%;
+            color: #151118;
+        }
+
+        .thumbnail-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div class="main-story">
+                    <h1 class="main-story-title"></h1>
+                    <div class="main-story-content">
+                        
+                    </div>
+                    <div class="thumbnail-container">
+                        <img class="main-story-thumbnail" src=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="module">
+            import { empathy_stories } from './empathy_stories.js';
+            const storyId = parseInt(window.location.href.split('?')[1].split('=')[1]);
+
+            const story = empathy_stories.filter(story => story.id === storyId)[0];
+
+            const storyTitle = document.getElementsByClassName('main-story-title')[0];
+            const storyContent = document.getElementsByClassName('main-story-content')[0];
+            const storyThumbnail = document.getElementsByClassName('main-story-thumbnail')[0];
+
+            let ConvertStringToHTML = function (str) {
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(str, 'text/html');
+                return doc.body;
+            }
+
+            const content = ConvertStringToHTML(story.description_long);
+
+            storyTitle.innerHTML = story.title;
+            storyContent.appendChild(content);
+            storyThumbnail.src = story.thumbnail;
+        </script>
+    </body>
+</html>
