@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Mulish:wght@300&family=Nunito:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    </head>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 800px;
+            padding: 60px 20px;
+        }
+        .short_story {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #E6E6E6 ;
+        }
+        .thumbnail {
+            width: 200px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        .story_title {
+            cursor: pointer;
+        }
+
+        .story_title:hover {
+            text-decoration: underline; 
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div class="stories">
+
+                </div>
+            </div>
+        </div>
+        <script type="module">
+            import { empathy_stories } from './empathy_stories.js';
+            const stories = document.getElementsByClassName('stories')[0];
+            
+            for (let story of empathy_stories) {
+                const short_story = document.createElement('div');
+                short_story.setAttribute('class', 'short_story');
+                stories.appendChild(short_story);
+
+                const left = document.createElement('div');
+                const title = document.createElement('h3');
+                title.setAttribute('class', 'story_title');
+                title.innerHTML = story.title;
+                const content_brief = document.createElement('div');
+                content_brief.setAttribute('class', 'content_brief');
+                content_brief.innerHTML = story.description_short;
+                left.appendChild(title);
+                left.appendChild(content_brief);
+                short_story.appendChild(left);
+
+                const right = document.createElement('div');
+                const thumbnail = document.createElement('img');
+                thumbnail.setAttribute('class', 'thumbnail')
+                thumbnail.src = story.thumbnail;
+                right.appendChild(thumbnail);
+                short_story.appendChild(right);
+            }
+
+        </script>
+    </body>
+</html>
