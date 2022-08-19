@@ -11,8 +11,26 @@
 }
 .navigation {
     padding: 20px 0 0 0;
-    border-bottom: 1px solid #E9E9E9 ;
-    margin-bottom: 60px;
+    border-bottom: 1px solid #E9E9E9;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.nav-items {
+    display: flex;
+}
+
+.each-nav-item {
+    margin: 0 10px;
+    list-style-type: none;
+    cursor: pointer;
+    color: #5B5B5B;
+}
+
+.each-nav-item:hover {
+    color: #000;
 }
 .logo-container {
     display: flex;
@@ -25,8 +43,23 @@
     font-size: 60px;
     line-height: 0;
     font-family: 'DynaPuff', cursive;
-    color: #F71D9A;
+    /* color: #F71D9A; */
     margin-bottom: 20px;
+    color: #DE58A5;
+}
+.banner {
+    height: 250px;
+    background: #FDF1C9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-text {
+    font-size: 28px;
+    max-width: 600px;
+    text-align: center;
+    color:#000 ;
 }
 .session-content {
     display: flex;
