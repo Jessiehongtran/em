@@ -45,10 +45,16 @@
             </div>
         </div>
         <script type="module">
-            import { empathy_stories } from './empathy_stories.js';
-            const storyId = parseInt(window.location.href.split('?')[1].split('=')[1]);
-
-            const story = empathy_stories.filter(story => story.id === storyId)[0];
+            import { empathy_stories } from '../js/empathy_stories.js';
+            import { vul_stories } from '../js/vul_stories.js';
+            const storyType = window.location.href.split('?')[1].split('=')[1];
+            const storyId = parseInt(window.location.href.split('?')[2].split('=')[1]);
+            let story;
+            if (storyType === 'empathy') {
+                story = empathy_stories.filter(story => story.id === storyId)[0];
+            } else if (storyType === 'vulnerability') {
+                story = vul_stories.filter(story => story.id === storyId)[0];
+            }
 
             const storyTitle = document.getElementsByClassName('main-story-title')[0];
             const storyContent = document.getElementsByClassName('main-story-content')[0];
