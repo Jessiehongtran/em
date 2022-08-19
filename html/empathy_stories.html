@@ -38,6 +38,11 @@
         .story_title:hover {
             text-decoration: underline; 
         }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
     </style>
     <body>
         <div class="container">
@@ -57,13 +62,16 @@
                 stories.appendChild(short_story);
 
                 const left = document.createElement('div');
+                const title_link = document.createElement('a');
+                title_link.href = `story.html?id=${story.id}`;
                 const title = document.createElement('h3');
+                title_link.appendChild(title);
                 title.setAttribute('class', 'story_title');
                 title.innerHTML = story.title;
                 const content_brief = document.createElement('div');
                 content_brief.setAttribute('class', 'content_brief');
                 content_brief.innerHTML = story.description_short;
-                left.appendChild(title);
+                left.appendChild(title_link);
                 left.appendChild(content_brief);
                 short_story.appendChild(left);
 

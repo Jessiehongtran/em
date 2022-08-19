@@ -1,0 +1,141 @@
+.container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+}
+.wrapper {
+    width: 100%;
+    max-width: 1100px;
+    padding: 60px 20px;
+}
+.session-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+.each-story {
+    width: 270px;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 10px 20px;
+}
+.empathy-story {
+    border: 1px solid #D6A2FE;
+    color: #151118;
+}
+.empathy {
+    color: #BA62FC;
+}
+
+.vulnerability {
+    color: #FB4B09;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+}
+
+.brief {
+    height: 60px;
+    margin: 0;
+}
+
+.title {
+    margin: 10px 0;
+    height: 50px;
+}
+
+.arrow {
+    display: flex;
+    justify-content: flex-end;
+    color:#151118;
+    text-decoration: none;
+}
+
+.fa-arrow-right {
+    cursor: pointer;
+}
+
+.fa-arrow-right:hover {
+    color: #BA62FC;
+}
+
+.more-action {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+a {
+    text-decoration: none;
+    color: inherit
+}
+.vul-story {
+    width: 450px;
+    border: 1px solid #FB4B09;
+    margin: 15px;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.square, .circle {
+    height: 50px;
+    width: 50px;
+    border: none;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.oval {
+    height: 50px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.rectangle {
+    height: 50px;
+    width: 60px;
+}
+
+/* .parallelogram {
+    width: 60px;
+	height: 50px;
+	transform: skew(20deg);
+}
+
+.triangle-up {
+    width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 50px solid #555;
+}
+
+.triangle-down {
+    width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-top: 50px solid #555;
+}
+
+.triangle-left {
+    width: 0;
+	height: 0;
+	border-top: 25px solid transparent;
+	border-right: 50px solid #555;
+	border-bottom: 25px solid transparent;
+}
+
+.triangle-right {
+    width: 0;
+	height: 0;
+	border-top: 25px solid transparent;
+	border-left: 50px solid #555;
+	border-bottom: 25px solid transparent;
+} */

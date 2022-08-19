@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Mulish:wght@300&family=Nunito:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div class="session" >
+                    <h2 class="session-title empathy">Empathy</h2>
+                    <div class="session-content" id="empathy">
+                        
+                    </div>
+                    <div class="more-action">
+                        <a href="empathy_stories.html">Read More...</a>
+                    </div>
+                </div>
+                <div class="session" >
+                    <h2 class="session-title vulnerability">Vulnerability</h2>
+                    <div class="session-content" id="vulnerability">
+                        
+                    </div>
+                    <div class="more-action">
+                        <a href="vul_stories.html">Read More...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="module">
+            import { empathy_stories } from '../js/empathy_stories.js';
+            import { vul_stories } from '../js/vul_stories.js';
+
+            const sessionEmpathy = document.getElementById('empathy');
+            const sessionVul = document.getElementById('vulnerability');
+
+            const randomShapeClasses = ['square', 'circle', 'oval', 'rectangle']
+
+            for (let story of empathy_stories.slice(0, 3)) {
+                const eachStory = document.createElement('div');
+                eachStory.setAttribute('class', 'each-story empathy-story');
+                sessionEmpathy.appendChild(eachStory);
+
+                const thumbnail = document.createElement('img');
+                thumbnail.setAttribute('class', 'thumbnail')
+                thumbnail.src= story.thumbnail;
+                eachStory.appendChild(thumbnail);
+            
+                const title = document.createElement('h3');
+                title.setAttribute('class', 'title');
+                title.innerHTML = story.title;
+                eachStory.appendChild(title);
+
+                const brief = document.createElement('p');
+                brief.setAttribute('class', 'brief');
+                brief.innerHTML = story.description_short;
+                eachStory.appendChild(brief);
+
+                const arrow = document.createElement('a');
+                arrow.href = `story.html?id=${story.id}`
+                arrow.setAttribute('class', 'arrow');
+                arrow.innerHTML = '<i class="fas fa-arrow-right"></i>'
+                eachStory.appendChild(arrow);
+            }
+
+            for (let story of vul_stories.slice(0, 4)) {
+                const eachStory = document.createElement('div');
+                eachStory.setAttribute('class', 'each-story vul-story');
+                sessionVul.appendChild(eachStory);
+
+                const left = document.createElement('div');
+                left.style.display = 'flex';
+                left.style.justifyContent = 'center';
+                left.style.width = '220px';
+                const shape = document.createElement('div');
+                const randomInd = Math.floor(Math.random()*(randomShapeClasses.length-1));
+                const randomR = Math.floor(Math.random()*255) + 50;
+                const randomG = Math.floor(Math.random()*255) + 50;
+                const randomB = Math.floor(Math.random()*255) + 50;
+                shape.setAttribute('class', randomShapeClasses[randomInd]);
+                shape.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+                console.log('randomInd', randomInd, randomShapeClasses[randomInd], randomR, randomG, randomB);
+                left.appendChild(shape);
+                eachStory.appendChild(left);
+
+                const right = document.createElement('div');
+                const title = document.createElement('h3');
+                title.setAttribute('class', 'title');
+                title.innerHTML = story.title;
+                right.appendChild(title);
+                eachStory.appendChild(right);
+
+                const brief = document.createElement('p');
+                brief.setAttribute('class', 'brief');
+                brief.innerHTML = story.description_short;
+                right.appendChild(brief);
+
+                const arrow = document.createElement('a');
+                arrow.href = `story.html?id=${story.id}`
+                arrow.setAttribute('class', 'arrow');
+                arrow.innerHTML = '<i class="fas fa-arrow-right"></i>'
+                right.appendChild(arrow);
+            }
+        </script>
+    </body>
+</html>
