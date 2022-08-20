@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="../css/index.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -14,8 +15,18 @@
         }
         .wrapper {
             width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stories {
+            padding: 0 20px 60px 20px;
+        }
+
+        .stories, .intro {
             max-width: 800px;
-            padding: 60px 20px;
         }
         .short_story {
             display: flex;
@@ -43,10 +54,45 @@
             text-decoration: none;
             color: inherit
         }
+
+        .intro {
+            margin: 40px 0;
+            font-size: 18px;
+            line-height: 150%;
+        }
+
+        .intro.empathy {
+            color: #BA62FC;
+        }
+
+        .intro.vul {
+            color: #FB4B09
+        }
+
     </style>
     <body>
         <div class="container">
             <div class="wrapper">
+                <div class="navigation">
+                    <div class="logo-container">
+                        <img src="../assets/images/mom&kid.png" class="logo" />
+                        <h1 class="logo-text">Em</h1>
+                    </div>
+                    <ul class="nav-items">
+                        <li class="each-nav-item">
+                            <a href="round_tables.html">Round Tables</a>
+                        </li>
+                        <li class="each-nav-item">
+                            <a href="stories.html?type=empathy">Empathy</a>
+                        </li>
+                        <li class="each-nav-item">
+                            <a href="stories.html?type=vulnerability">Vulnerability</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="intro">
+
+                </div>
                 <div class="stories">
 
                 </div>
@@ -57,13 +103,24 @@
             import { vul_stories } from '../js/vul_stories.js'
 
             const storyType = window.location.href.split('?')[1].split('=')[1];
-            let storyList = []
+            const stories = document.getElementsByClassName('stories')[0];
+            const intro = document.getElementsByClassName('intro')[0];
+
+            let storyList = [];
+            let storyIntro;
+
             if (storyType === 'empathy') {
                 storyList = empathy_stories;
+                storyIntro = "Not every kid gets to exposed to different people's lives to have an empathy for them, or maybe they are not taught how to empathize with others. It takes practice and learning to feel what others are going through, to say: 'I am so sorry to hear that', then to look back and appreciate what you have."
+                intro.classList.add('empathy')
             } else {
                 storyList = vul_stories;
+                storyIntro = 'Vulnerable, I was taught that is weak, how is that for you? Growing up, I never know how to cry and be sad in front of my family, I was missing out in sharing with them and in bringing them closer to me. '
+                intro.classList.add('vul')
             }
-            const stories = document.getElementsByClassName('stories')[0];
+
+            intro.innerHTML = storyIntro;
+            
             
             for (let story of storyList) {
                 const short_story = document.createElement('div');

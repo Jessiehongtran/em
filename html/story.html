@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="../css/index.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -17,10 +18,17 @@
 
         .wrapper {
             width: 100%;
-            max-width: 800px;
-            padding: 60px 20px;
+            max-width: 1100px;
             line-height: 170%;
             color: #151118;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-story {
+            max-width: 800px;
+            padding: 60px 20px;
         }
 
         .thumbnail-container {
@@ -33,6 +41,23 @@
     <body>
         <div class="container">
             <div class="wrapper">
+                <div class="navigation">
+                    <div class="logo-container">
+                        <img src="../assets/images/mom&kid.png" class="logo" />
+                        <h1 class="logo-text">Em</h1>
+                    </div>
+                    <ul class="nav-items">
+                        <li class="each-nav-item">
+                            <a href="round_tables.html">Round Tables</a>
+                        </li>
+                        <li class="each-nav-item">
+                            <a href="stories.html?type=empathy">Empathy</a>
+                        </li>
+                        <li class="each-nav-item">
+                            <a href="stories.html?type=vulnerability">Vulnerability</a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="main-story">
                     <h1 class="main-story-title"></h1>
                     <div class="main-story-content">
