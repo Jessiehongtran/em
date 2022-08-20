@@ -54,9 +54,18 @@
         </div>
         <script type="module">
             import { empathy_stories } from '../js/empathy_stories.js';
+            import { vul_stories } from '../js/vul_stories.js'
+
+            const storyType = window.location.href.split('?')[1].split('=')[1];
+            let storyList = []
+            if (storyType === 'empathy') {
+                storyList = empathy_stories;
+            } else {
+                storyList = vul_stories;
+            }
             const stories = document.getElementsByClassName('stories')[0];
             
-            for (let story of empathy_stories) {
+            for (let story of storyList) {
                 const short_story = document.createElement('div');
                 short_story.setAttribute('class', 'short_story');
                 stories.appendChild(short_story);
@@ -75,12 +84,14 @@
                 left.appendChild(content_brief);
                 short_story.appendChild(left);
 
-                const right = document.createElement('div');
-                const thumbnail = document.createElement('img');
-                thumbnail.setAttribute('class', 'thumbnail')
-                thumbnail.src = story.thumbnail;
-                right.appendChild(thumbnail);
-                short_story.appendChild(right);
+                if (story.thumbnail) {
+                    const right = document.createElement('div');
+                    const thumbnail = document.createElement('img');
+                    thumbnail.setAttribute('class', 'thumbnail')
+                    thumbnail.src = story.thumbnail;
+                    right.appendChild(thumbnail);
+                    short_story.appendChild(right);
+                }
             }
 
         </script>
