@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/rounds.css" />
     </head>
     <body>
         <div class="container">
@@ -23,43 +24,61 @@
                         </li>
                     </ul>
                 </div>
-                <div style="display: flex; flex-direction: column; align-items: center">
-                    <div class="round-highlight" style="display: flex; align-items: center; padding: 40px 0; ">
-                        <div class="left" style="margin-right: 60px; border: 1px solid silver; border-radius: 50%; width: 300px; height: 300px">
-
-                        </div>
-                        <div class="right" style="width: 700px; line-height: 160%">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                        </div>
+                <div class="rounds-container">
+                    <div class="round-highlight">
                     </div>
-                    <div class="round-list" style="width: 100%; max-width: 800px">
-                        <div class="each-round" style="display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid silver">
-                            <div class="each-round left" style="margin-right: 60px; border: 1px solid silver; width: 100px; height: 100px; border-radius: 50%">
-
-                            </div>
-                            <div class="each-round right" style="width: 600px">
-                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it.
-                            </div>
-                        </div>
-                        <div class="each-round" style="display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid silver">
-                            <div class="each-round left" style="margin-right: 60px; border: 1px solid silver; width: 100px; height: 100px; border-radius: 50%">
-
-                            </div>
-                            <div class="each-round right" style="width: 600px">
-                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it.
-                            </div>
-                        </div>
-                        <div class="each-round" style="display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid silver">
-                            <div class="each-round left" style="margin-right: 60px; border: 1px solid silver; width: 100px; height: 100px; border-radius: 50%">
-
-                            </div>
-                            <div class="each-round right" style="width: 600px">
-                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it.
-                            </div>
-                        </div>
+                    <div class="round-list">
                     </div>
                 </div>
             </div>
         </div>
+        <script type="module">
+            import { rounds } from '../js/rounds.js';
+
+            const roundList = document.getElementsByClassName('round-list')[0];
+            const roundHighlight = document.getElementsByClassName('round-highlight')[0];
+
+            const randomInd = Math.floor(Math.random()*rounds.length);
+            const highlight = rounds[randomInd];
+
+
+            for (let i = 0; i < rounds.length; i++) {
+                const eachRound = document.createElement('div');
+                eachRound.setAttribute('class', 'each-round');
+
+                const leftRound = document.createElement('div');
+                leftRound.innerHTML = rounds[i].num;
+                eachRound.appendChild(leftRound);
+
+                if (rounds[i].num === highlight.num) {
+                    roundHighlight.appendChild(eachRound);
+                    leftRound.setAttribute('class', 'big-left');
+                } else {
+                    roundList.appendChild(eachRound);
+                    leftRound.setAttribute('class', 'left');
+                }
+
+                const rightRound = document.createElement('div');
+                rightRound.setAttribute('class', 'right');
+                eachRound.appendChild(rightRound);
+
+                const title = document.createElement('h3');
+                title.setAttribute('class', 'title');
+                title.innerHTML = rounds[i].title;
+                rightRound.appendChild(title);
+
+                const description = document.createElement('p');
+                description.setAttribute('class', 'description');
+                description.innerHTML = rounds[i].description;
+                rightRound.appendChild(description);
+
+                const time = document.createElement('p');
+                time.setAttribute('class', 'time');
+                time.innerHTML = rounds[i].time;
+                rightRound.appendChild(time);
+
+
+            }
+        </script>
     </body>
 </html>
