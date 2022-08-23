@@ -34,13 +34,21 @@
         </div>
         <script type="module">
             import { rounds } from '../js/rounds.js';
+            import { users } from '../js/users.js';
+
+            function findUser(userId) {
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].user_id === userId) {
+                        return users[i]
+                    }
+                }
+            }
 
             const roundList = document.getElementsByClassName('round-list')[0];
             const roundHighlight = document.getElementsByClassName('round-highlight')[0];
 
             const randomInd = Math.floor(Math.random()*rounds.length);
             const highlight = rounds[randomInd];
-
 
             for (let i = 0; i < rounds.length; i++) {
                 const eachRound = document.createElement('div');
@@ -76,6 +84,17 @@
                 time.setAttribute('class', 'time');
                 time.innerHTML = rounds[i].time;
                 rightRound.appendChild(time);
+
+                const participants = document.createElement('div');
+                participants.setAttribute('class', 'participants');
+                rightRound.appendChild(participants);
+
+                for (let j = 0; j < rounds[i].participants.length; j++) {
+                    const eachUser = document.createElement('img');
+                    eachUser.setAttribute('class', 'each-participant');
+                    eachUser.src = findUser(rounds[i].participants[j].user_id).profile_picture;
+                    participants.appendChild(eachUser);
+                }
 
 
             }
