@@ -27,9 +27,9 @@
                 <div class="rounds-container">
                     <div class="sub-top">
                         <h4 class="sub-title">Coming soon</h4>
-                        <button class="round-create-btn">
+                        <a class="round-create-btn" href="new_round.html">
                             Create new round
-                        </button>
+                        </a>
                     </div>
                     <div class="round-highlight">
                     </div>
@@ -42,6 +42,13 @@
         <script type="module">
             import { rounds } from '../js/rounds.js';
             import { users } from '../js/users.js';
+
+            let new_round = window.localStorage.getItem('new_round');
+            if (new_round) {
+                new_round = JSON.parse(new_round);
+                rounds.push(new_round);
+            }
+
 
             function findUser(userId) {
                 for (let i = 0; i < users.length; i++) {
@@ -62,7 +69,7 @@
                 eachRound.setAttribute('class', 'each-round');
 
                 const leftRound = document.createElement('div');
-                leftRound.innerHTML = rounds[i].num;
+                leftRound.innerHTML = "#" + rounds[i].num;
                 eachRound.appendChild(leftRound);
 
                 if (rounds[i].num === highlight.num) {

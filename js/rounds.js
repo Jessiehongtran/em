@@ -1,6 +1,6 @@
 export const rounds = [
     {
-        num: "#7890",
+        num: 7890,
         title: "Round Title",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
         time: "",
@@ -13,7 +13,7 @@ export const rounds = [
         ]
     },
     {
-        num: "#1234",
+        num: 1234,
         title: "Round Title",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
         time: "",
@@ -24,7 +24,7 @@ export const rounds = [
         ]
     },
     {
-        num: "#1245",
+        num: 1245,
         title: "Round Title",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
         time: "",
@@ -34,7 +34,7 @@ export const rounds = [
         ]
     },
     {
-        num: "#1267",
+        num: 1267,
         title: "Round Title",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
         time: "",

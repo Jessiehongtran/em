@@ -129,7 +129,11 @@
 
                 const left = document.createElement('div');
                 const title_link = document.createElement('a');
-                title_link.href = `story.html?id=${story.id}`;
+                if (storyType === 'empathy') { 
+                    title_link.href = `story.html?type=empathy?id=${story.id}`;
+                } else {
+                    title_link.href = `story.html?type=vulnerability?id=${story.id}`;
+                }
                 const title = document.createElement('h3');
                 title_link.appendChild(title);
                 title.setAttribute('class', 'story_title');
