@@ -40,6 +40,7 @@
             </div>
         </div>
         <script type="module">
+            console.log('loading');
             import { rounds } from '../js/rounds.js';
             import { users } from '../js/users.js';
 
@@ -48,7 +49,6 @@
                 new_round = JSON.parse(new_round);
                 rounds.push(new_round);
             }
-
 
             function findUser(userId) {
                 for (let i = 0; i < users.length; i++) {
