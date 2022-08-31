@@ -63,10 +63,13 @@
     padding: 6px 20px;
     border-radius: 6px;
     font-size: 12px;
+    margin-top: 10px;
 }
 
 .title {
     margin-bottom: -15px;
+    margin-top: -10px;
+    font-size: 18px;
 }
 
 .description {
@@ -76,8 +79,11 @@
 }
 
 .time {
-    color: #6D6D6D;
+    color: #764C16;
     font-size: 14px;
+    text-transform: capitalize;
+    font-weight: bold;
+    letter-spacing: 1.2;
 }
 
 .round-list {
@@ -91,8 +97,6 @@
     padding: 20px 0; 
     flex-wrap: wrap;
 }
-
-
 
 .circle {
     color: #6D6D6D; 
