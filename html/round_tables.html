@@ -42,11 +42,23 @@
         <script type="module">
             const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-            const timezone = 'PDT'
-            const timeZoneOffset = -7;
+
+            function pickInitials(str) {
+                let letters = ''
+                let k = 0;
+                for (let cha of str) {
+                    if (k === 0 || str[k-1] === ' ') {
+                        letters += str[k]
+                    }
+                    k +=1
+                }
+                return letters
+            }
+
+            const timezone = pickInitials(new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]);
 
             function convertTimeFromIntToString(num) {
-                let dateNum = num + timeZoneOffset*60*60*1000;
+                let dateNum = num - new Date().getTimezoneOffset()*60*1000;
                 var dateString = new Date(dateNum);
                 var month = monthNames[dateString.getUTCMonth()];
                 var day = dayNames[dateString.getUTCDay()-1];
