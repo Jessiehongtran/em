@@ -69,15 +69,30 @@
                 eachRound.setAttribute('class', 'each-round');
 
                 const leftRound = document.createElement('div');
-                leftRound.innerHTML = "#" + rounds[i].num;
+                leftRound.setAttribute('class', 'left');
                 eachRound.appendChild(leftRound);
+                
+                const circle = document.createElement('div');
+                circle.innerHTML = "#" + rounds[i].num;
+                leftRound.appendChild(circle);
+
+                const time = document.createElement('p');
+                time.setAttribute('class', 'time');
+                time.innerHTML = rounds[i].time;
+                leftRound.appendChild(time);
+
+                const joinBtn = document.createElement('a');
+                joinBtn.setAttribute('class', 'join-btn')
+                joinBtn.href= rounds[i].link_to_join;
+                joinBtn.innerHTML = 'Join';
+                leftRound.appendChild(joinBtn);
 
                 if (rounds[i].num === highlight.num) {
                     roundHighlight.appendChild(eachRound);
-                    leftRound.setAttribute('class', 'big-left');
+                    circle.setAttribute('class', 'big-circle');
                 } else {
                     roundList.appendChild(eachRound);
-                    leftRound.setAttribute('class', 'left');
+                    circle.setAttribute('class', 'circle')
                 }
 
                 const rightRound = document.createElement('div');
@@ -94,22 +109,28 @@
                 description.innerHTML = rounds[i].description;
                 rightRound.appendChild(description);
 
-                const time = document.createElement('p');
-                time.setAttribute('class', 'time');
-                time.innerHTML = rounds[i].time;
-                rightRound.appendChild(time);
-
                 const participants = document.createElement('div');
                 participants.setAttribute('class', 'participants');
                 rightRound.appendChild(participants);
 
-                for (let j = 0; j < rounds[i].participants.length; j++) {
+                for (let j = 0; j < rounds[i].participants.slice(0,4).length; j++) {
                     const eachUser = document.createElement('img');
                     eachUser.setAttribute('class', 'each-participant');
                     eachUser.src = findUser(rounds[i].participants[j].user_id).profile_picture;
                     participants.appendChild(eachUser);
                 }
 
+                if (rounds[i].participants.length - 4 > 0) {
+                    const restOfParticipants = document.createElement('div');
+                    restOfParticipants.style.marginLeft = '5px'
+                    const num = document.createElement('span');
+                    num.innerHTML = '+ ' + (rounds[i].participants.length - 4).toString()
+                    const text = document.createElement('span');
+                    text.innerHTML = ' others'
+                    restOfParticipants.appendChild(num);
+                    restOfParticipants.appendChild(text);
+                    participants.appendChild(restOfParticipants);
+                }
 
             }
         </script>
