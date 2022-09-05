@@ -40,6 +40,9 @@
             </div>
         </div>
         <script type="module">
+            //check out this article for handling time zone
+            //https://bobbyhadz.com/blog/javascript-date-pacific-standard-time
+
             const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -57,6 +60,16 @@
 
             const timezone = pickInitials(new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]);
 
+            function convertTimeFromIntToString2 (num) {
+                const dateNum = num - new Date().getTimezoneOffset()*60*1000;
+                const dateString = new Date(dateNum).toLocaleString();
+                let date = dateString.split(',')[0]
+                let time = dateString.split(' ')[1]
+                let ampm = dateString.split(' ')[2]
+                
+                return monthNames[date.split('/')[0] -1 ] + ' ' + date.split('/')[1] + ', ' + date.split('/')[2] + ' - ' + time.split(':')[0] + ':' + time.split(':')[1] + ' ' + ampm
+            }
+            
             function convertTimeFromIntToString(num) {
                 let dateNum = num - new Date().getTimezoneOffset()*60*1000;
                 var dateString = new Date(dateNum);
@@ -137,10 +150,11 @@
 
                 const time = document.createElement('p');
                 time.setAttribute('class', 'time');
-                time.innerHTML = convertTimeFromIntToString(rounds[i].time);
+                time.innerHTML = convertTimeFromIntToString(rounds[i].time).toUpperCase();
                 rightRound.appendChild(time);
 
-                const title = document.createElement('h3');
+                const title = document.createElement('a');
+                title.href= `each_round.html?round_id=${rounds[i].id}`
                 title.setAttribute('class', 'title');
                 title.innerHTML = rounds[i].title;
                 rightRound.appendChild(title);

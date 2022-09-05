@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/each_round.css" />
+        <link rel="stylesheet" href="/fontawesome/css/all.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div class="navigation">
+                    <div class="logo-container">
+                        <img src="../assets/images/mom&kid.png" class="logo" />
+                        <h1 class="logo-text">Em</h1>
+                    </div>
+                    <ul class="nav-items">
+                        <li class="each-nav-item">
+                            <a href="round_tables.html">Round Tables</a>
+                        </li>
+                        <li class="each-nav-item">
+                            <a href="stories.html?type=empathy">Empathy</a>
+                        </li>
+                        <li class="each-nav-item">
+                            <a href="stories.html?type=vulnerability">Vulnerability</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="each-round">
+                    <h1 class="title">My son does not listen to me</h1>
+                    <div class="content">
+                        <div class="info">
+                            <div class="description">
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                </p>
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="links">
+                            <div class="each-link">
+                                <span>
+                                    <i class="fas fa-clock"></i>
+                                </span>
+                                <span class="time">Time</span>
+                            </div>
+                            <div class="each-link">
+                                <span>
+                                    <i class="fas fa-video"></i>
+                                </span>
+                                <span class="room">Link</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="module">
+            import { rounds } from '../js/rounds.js';
+
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+            let round_id;
+            const title = document.getElementsByClassName('title')[0];
+            const description = document.getElementsByClassName('description')[0];
+            const time = document.getElementsByClassName('time')[0];
+            const room = document.getElementsByClassName('room')[0];
+            const room_icon = document.getElementsByClassName('fa-video')[0];
+
+            function convertTimeFromIntToString (num) {
+                const dateNum = num - new Date().getTimezoneOffset()*60*1000;
+                const dateString = new Date(dateNum).toLocaleString();
+                let date = dateString.split(',')[0]
+                let time = dateString.split(' ')[1]
+                let ampm = dateString.split(' ')[2]
+                
+                return monthNames[date.split('/')[0] -1 ] + ' ' + date.split('/')[1] + ', ' + date.split('/')[2] + ' - ' + time.split(':')[0] + ':' + time.split(':')[1] + ' ' + ampm
+            }
+
+            try {
+                round_id = parseInt(window.location.href.split('?')[1].split('=')[1]);
+            } catch (err) {
+
+            }
+
+            console.log(round_id)
+
+            if (round_id) {
+                const the_round = rounds.filter(round => round.id === round_id)[0];
+                console.log(the_round);
+                title.innerHTML = the_round.title;
+                description.innerHTML = the_round.description;
+                time.innerHTML = convertTimeFromIntToString(the_round.time);
+                room.innerHTML = the_round.link_to_join;
+                const room_link= document.createElement('a');
+                room_link.href= the_round.link_to_join;
+                room_icon.appendChild(room_link);
+            }
+            
+        </script>
+    </body>
+</html>
