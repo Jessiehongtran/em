@@ -25,11 +25,14 @@
                     </ul>
                 </div>
                 <div class="rounds-container">
-                    <div class="sub-top">
-                        <h4 class="sub-title">Coming soon</h4>
+                    <div class="search-container">
+                        <input placeholder="Search topic..." id="search-input" />
                         <a class="round-create-btn" href="new_round.html">
                             Create new round
                         </a>
+                    </div>
+                    <div class="sub-top">
+                        <h4 class="sub-title">Coming soon</h4>
                     </div>
                     <div class="round-highlight">
                     </div>
@@ -40,12 +43,34 @@
             </div>
         </div>
         <script type="module">
+            import { rounds } from '../js/rounds.js';
+            import { users } from '../js/users.js';
             //check out this article for handling time zone
             //https://bobbyhadz.com/blog/javascript-date-pacific-standard-time
 
+            let rounds_to_show = rounds;
+
+            const searchInput = document.getElementById('search-input');
+
             const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            
+            function filterRound () {
+                let searchValue = document.getElementById('search-input').value;
 
+                if (searchValue.length > 0) {
+                    const matchedRounds = rounds.filter(round => round.title.toLowerCase().includes(searchValue.toLowerCase()));
+                    console.log('matchedRounds', matchedRounds);
+                    rounds_to_show = matchedRounds
+                } else {
+                    rounds_to_show = rounds;
+                }
+
+                assembleRounds();
+            }
+
+            searchInput.addEventListener('change', () => filterRound())
+            
             function pickInitials(str) {
                 let letters = ''
                 let k = 0;
@@ -95,13 +120,10 @@
                 return null
             }
 
-            import { rounds } from '../js/rounds.js';
-            import { users } from '../js/users.js';
-
             let new_round = window.localStorage.getItem('new_round');
             if (new_round) {
                 new_round = JSON.parse(new_round);
-                rounds.push(new_round);
+                rounds_to_show.push(new_round);
             }
 
             function findUser(userId) {
@@ -116,78 +138,93 @@
             const roundHighlight = document.getElementsByClassName('round-highlight')[0];
 
             const randomInd = Math.floor(Math.random()*rounds.length);
-            const highlight = rounds[randomInd];
+            const highlight = rounds_to_show[randomInd];
 
-            for (let i = 0; i < rounds.length; i++) {
-                const eachRound = document.createElement('div');
-                eachRound.setAttribute('class', 'each-round');
-
-                const leftRound = document.createElement('div');
-                leftRound.setAttribute('class', 'left');
-                eachRound.appendChild(leftRound);
+            function assembleRounds() {
                 
-                const circle = document.createElement('div');
-                circle.innerHTML = "#" + rounds[i].num;
-                leftRound.appendChild(circle);
-
-                const joinBtn = document.createElement('a');
-                joinBtn.setAttribute('class', 'join-btn')
-                joinBtn.href= rounds[i].link_to_join;
-                joinBtn.innerHTML = 'Join';
-                leftRound.appendChild(joinBtn);
-
-                if (rounds[i].num === highlight.num) {
-                    roundHighlight.appendChild(eachRound);
-                    circle.setAttribute('class', 'big-circle');
-                } else {
-                    roundList.appendChild(eachRound);
-                    circle.setAttribute('class', 'circle')
+                while (roundList.firstChild) {
+                    roundList.removeChild(roundList.firstChild)
                 }
 
-                const rightRound = document.createElement('div');
-                rightRound.setAttribute('class', 'right');
-                eachRound.appendChild(rightRound);
-
-                const time = document.createElement('p');
-                time.setAttribute('class', 'time');
-                time.innerHTML = convertTimeFromIntToString(rounds[i].time).toUpperCase();
-                rightRound.appendChild(time);
-
-                const title = document.createElement('a');
-                title.href= `each_round.html?round_id=${rounds[i].id}`
-                title.setAttribute('class', 'title');
-                title.innerHTML = rounds[i].title;
-                rightRound.appendChild(title);
-
-                const description = document.createElement('p');
-                description.setAttribute('class', 'description');
-                description.innerHTML = rounds[i].description;
-                rightRound.appendChild(description);
-
-                const participants = document.createElement('div');
-                participants.setAttribute('class', 'participants');
-                rightRound.appendChild(participants);
-
-                for (let j = 0; j < rounds[i].participants.slice(0,4).length; j++) {
-                    const eachUser = document.createElement('img');
-                    eachUser.setAttribute('class', 'each-participant');
-                    eachUser.src = findUser(rounds[i].participants[j].user_id).profile_picture;
-                    participants.appendChild(eachUser);
+                while (roundHighlight.firstChild) {
+                    roundHighlight.removeChild(roundHighlight.firstChild)
                 }
 
-                if (rounds[i].participants.length - 4 > 0) {
-                    const restOfParticipants = document.createElement('div');
-                    restOfParticipants.style.marginLeft = '5px'
-                    const num = document.createElement('span');
-                    num.innerHTML = '+ ' + (rounds[i].participants.length - 4).toString()
-                    const text = document.createElement('span');
-                    text.innerHTML = ' others'
-                    restOfParticipants.appendChild(num);
-                    restOfParticipants.appendChild(text);
-                    participants.appendChild(restOfParticipants);
-                }
+                for (let i = 0; i < rounds_to_show.length; i++) {
+                    const eachRound = document.createElement('div');
+                    eachRound.setAttribute('class', 'each-round');
 
+                    const leftRound = document.createElement('div');
+                    leftRound.setAttribute('class', 'left');
+                    eachRound.appendChild(leftRound);
+                    
+                    const circle = document.createElement('div');
+                    circle.innerHTML = "#" + rounds_to_show[i].num;
+                    leftRound.appendChild(circle);
+
+                    const joinBtn = document.createElement('a');
+                    joinBtn.setAttribute('class', 'join-btn')
+                    joinBtn.href= rounds_to_show[i].link_to_join;
+                    joinBtn.innerHTML = 'Join';
+                    leftRound.appendChild(joinBtn);
+
+                    if (rounds_to_show[i].num === highlight.num) {
+                        roundHighlight.appendChild(eachRound);
+                        circle.setAttribute('class', 'big-circle');
+                    } else {
+                        roundList.appendChild(eachRound);
+                        circle.setAttribute('class', 'circle')
+                    }
+
+                    const rightRound = document.createElement('div');
+                    rightRound.setAttribute('class', 'right');
+                    eachRound.appendChild(rightRound);
+
+                    if (!isNaN(rounds_to_show[i].time)) {
+                        const time = document.createElement('p');
+                        time.setAttribute('class', 'time');
+                        time.innerHTML = convertTimeFromIntToString(rounds_to_show[i].time).toUpperCase();
+                        rightRound.appendChild(time);
+                    }
+
+                    const title = document.createElement('a');
+                    title.href= `each_round.html?round_id=${rounds_to_show[i].id}`
+                    title.setAttribute('class', 'title');
+                    title.innerHTML = rounds_to_show[i].title;
+                    rightRound.appendChild(title);
+
+                    const description = document.createElement('p');
+                    description.setAttribute('class', 'description');
+                    description.innerHTML = rounds_to_show[i].description;
+                    rightRound.appendChild(description);
+
+                    const participants = document.createElement('div');
+                    participants.setAttribute('class', 'participants');
+                    rightRound.appendChild(participants);
+
+                    for (let j = 0; j < rounds_to_show[i].participants.slice(0,4).length; j++) {
+                        const eachUser = document.createElement('img');
+                        eachUser.setAttribute('class', 'each-participant');
+                        eachUser.src = findUser(rounds_to_show[i].participants[j].user_id).profile_picture;
+                        participants.appendChild(eachUser);
+                    }
+
+                    if (rounds_to_show[i].participants.length - 4 > 0) {
+                        const restOfParticipants = document.createElement('div');
+                        restOfParticipants.style.marginLeft = '5px'
+                        const num = document.createElement('span');
+                        num.innerHTML = '+ ' + (rounds_to_show[i].participants.length - 4).toString()
+                        const text = document.createElement('span');
+                        text.innerHTML = ' others'
+                        restOfParticipants.appendChild(num);
+                        restOfParticipants.appendChild(text);
+                        participants.appendChild(restOfParticipants);
+                    }
+
+                }
             }
+
+            assembleRounds();
         </script>
     </body>
 </html>

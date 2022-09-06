@@ -9,6 +9,21 @@
     align-items: flex-start;
 }
 
+.search-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#search-input {
+    height: 35px;
+    border: 1px solid silver;
+    border-radius: 6px;
+    padding: 0 20px;
+    width: 250px;
+}
+
 .sub-top {
     display: flex;
     width: 100%;
@@ -17,7 +32,7 @@
 }
 
 .round-create-btn {
-    margin: 20px 0;
+    margin: 20px 0 20px 20px;
     background-color: #FF9ED6;
     border-radius: 6px;
     padding: 10px 15px;
