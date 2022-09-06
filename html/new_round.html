@@ -2,66 +2,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/new_round.css" />
     </head>
-    <style>
-        .container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .form-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            max-width: 800px;
-            padding: 30px 0;
-        }
-
-        form {
-            width: 60%;
-            padding: 20px 0;
-        }
-
-        .row, input, textarea {
-            width: 100%;
-            font-family: 'Nunito', sans-serif;
-        }
-
-        input {
-            margin: 10px 0 20px 0;
-            height: 40px;
-            border-radius: 6px;
-            border: 1px solid grey;
-            padding: 0 20px;
-        }
-
-        textarea {
-            margin: 10px 0 20px 0;
-            border-radius: 6px;
-            min-height: 100px;
-            padding: 10px 20px;
-        }
-
-        .create-btn {
-            padding: 8px 20px;
-            border: none;
-            border-radius: 6px;
-            background-color: #FF9ED6;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .create-btn:hover {
-            background-color: #FBB3DC;
-        }
-
-    </style>
     <body>
         <div class="container">
             <div class="wrapper">
@@ -103,7 +45,13 @@
                             </label>
                             <input type="time" id="time" />
                         </div>
-                        <button>
+                        <div class="row">
+                            <label>
+                                Meet Link
+                            </label>
+                            <input type="url" id="time" />
+                        </div>
+                        <button class="create-btn">
                             Create
                         </button>
                     </form>
