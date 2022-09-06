@@ -51,6 +51,11 @@
                                 </span>
                                 <span class="room">Link</span>
                             </div>
+                            <div>
+                                <a class="calendar-link" href="http://www.google.com/calendar/event?action=TEMPLATE&text=Example%20Event&dates=20131124T010000Z/20131124T020000Z&details=Event%20Details%20Here&location=123%20Main%20St%2C%20Example%2C%20NY">
+                                    Add to calendar
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,15 +73,34 @@
             const time = document.getElementsByClassName('time')[0];
             const room = document.getElementsByClassName('room')[0];
             const room_icon = document.getElementsByClassName('fa-video')[0];
+            const calendar_link = document.getElementsByClassName('calendar-link')[0];
+
+            let year, month, date, hh, mm, ss; 
 
             function convertTimeFromIntToString (num) {
                 const dateNum = num - new Date().getTimezoneOffset()*60*1000;
                 const dateString = new Date(dateNum).toLocaleString();
-                let date = dateString.split(',')[0]
-                let time = dateString.split(' ')[1]
+                let yearMonthDate = dateString.split(',')[0].split('/');
+                let time = dateString.split(' ')[1].split(':')
                 let ampm = dateString.split(' ')[2]
+
+                month = yearMonthDate[0];
+                year = yearMonthDate[2];
+                date = yearMonthDate[1];
+                hh = time[0];
+                mm = time[1];
+                ss = time[2];
                 
-                return monthNames[date.split('/')[0] -1 ] + ' ' + date.split('/')[1] + ', ' + date.split('/')[2] + ' - ' + time.split(':')[0] + ':' + time.split(':')[1] + ' ' + ampm
+                return monthNames[month -1 ] + ' ' + date + ', ' + year + ' - ' + hh + ':' + mm + ' ' + ampm
+            }
+
+            function urlEncoded (url) {
+                for (let cha in url) {
+                    if (cha === ' ') {
+                        cha.replace(' ', '%20')
+                    }
+                }
+                return url
             }
 
             try {
@@ -84,8 +108,6 @@
             } catch (err) {
 
             }
-
-            console.log(round_id)
 
             if (round_id) {
                 const the_round = rounds.filter(round => round.id === round_id)[0];
@@ -97,6 +119,34 @@
                 const room_link= document.createElement('a');
                 room_link.href= the_round.link_to_join;
                 room_icon.appendChild(room_link);
+
+                const calendar_text = the_round.title;
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                if (date < 10) {
+                    date = '0' + date;
+                }
+                if (hh < 10) {
+                    hh = '0' + hh
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+                if (ss < 10) {
+                    ss = '0' + ss
+                }
+
+                const start_time = year + month + date + 'T' + hh + mm + ss ;
+                hh = parseInt(hh) + 1
+                if (hh < 10) {
+                    hh = '0' + hh.toString()
+                }
+
+                const end_time = year + month + date + 'T' + hh + mm + ss ;
+
+                calendar_link.href = `http://www.google.com/calendar/event?action=TEMPLATE&text=${urlEncoded(calendar_text)}&dates=${start_time + '/' + end_time}&details=${urlEncoded(the_round.description)}&location=${urlEncoded(the_round.link_to_join)}`
+
             }
             
         </script>
