@@ -39,10 +39,18 @@
                             <textarea id="description"></textarea>  
                         </div>
                         <div class="row">
-                            <label>
-                                Time
-                            </label>
-                            <input type="time" id="time" />
+                            <div>
+                                <label>
+                                    Time
+                                </label>
+                                <input type="datetime-local" id="time" />
+                            </div>
+                            <div>
+                                <label>
+                                    Duration (in mins)
+                                </label>
+                                <input type="number" id="duration"/>
+                            </div>
                         </div>
                         <div class="row">
                             <label>
@@ -62,14 +70,35 @@
             const problem = document.getElementById('problem');
             const time = document.getElementById('time');
             const description = document.getElementById('description');
+            const duration = document.getElementById('duration');
 
             function collectData (e) {
                 e.preventDefault();
+
+                const timeArr = time.value.split('T');
+                const dateArr = timeArr[0].split('-');
+                const hourArr = timeArr[1].split(':');
+                const year = parseInt(dateArr[0]);
+                const month = parseInt(dateArr[1]);
+                const date = parseInt(dateArr[2]);
+                const hh = parseInt(hourArr[0]);
+                const mm = parseInt(hourArr[1]);
+
+                const start_timeInNum = (year - 1970)*365.24*24*3600 + (month-1)*30.44*24*3600 + (date-1)*24*3600 + hh*3600 + mm*60;
+                let end_timeInNum;
+
+                if (duration && parseInt(duration) !== 0) {
+                    end_timeInNum = start_timeInNum + parseInt(duration)*60
+                } else {
+                    end_timeInNum = start_timeInNum + parseInt(duration)*30
+                }
+
                 const new_round = {
                     num: 0,
                     title: problem.value,
                     description: description.value,
-                    time: time.value,
+                    start_time: start_timeInNum,
+                    end_time: end_timeInNum,
                     participants: []
                 };
 
@@ -79,7 +108,6 @@
             }
 
             form.addEventListener('submit', e => collectData(e))
-
 
         </script>
     </body>

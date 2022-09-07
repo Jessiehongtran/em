@@ -81,8 +81,8 @@
                 const dateNum = num - new Date().getTimezoneOffset()*60*1000;
                 const dateString = new Date(dateNum).toLocaleString();
                 let yearMonthDate = dateString.split(',')[0].split('/');
-                let time = dateString.split(' ')[1].split(':')
-                let ampm = dateString.split(' ')[2]
+                let time = dateString.split(' ')[1].split(':');
+                let ampm = dateString.split(' ')[2];
 
                 month = yearMonthDate[0];
                 year = yearMonthDate[2];
@@ -114,7 +114,7 @@
                 console.log(the_round);
                 title.innerHTML = the_round.title;
                 description.innerHTML = the_round.description;
-                time.innerHTML = convertTimeFromIntToString(the_round.time);
+                time.innerHTML = convertTimeFromIntToString(the_round.start_time);
                 room.innerHTML = the_round.link_to_join;
                 const room_link= document.createElement('a');
                 room_link.href= the_round.link_to_join;
@@ -137,10 +137,25 @@
                     ss = '0' + ss
                 }
 
+                console.log('before', hh, mm);
+
                 const start_time = year + month + date + 'T' + hh + mm + ss ;
-                hh = parseInt(hh) + 1
-                if (hh < 10) {
-                    hh = '0' + hh.toString()
+                const durationInMin = (the_round.end_time - the_round.start_time)/60;
+
+                console.log('durationInMin', durationInMin);
+                
+                if (durationInMin < 60) {
+                    mm = parseInt(mm) + durationInMin;
+
+                    if (mm < 10) {
+                        mm = '0' + mm.toString()
+                    }
+                } else {
+                    hh = parseInt(hh) + Math.floor(durationInMin/60)
+
+                    if (hh < 10) {
+                        hh = '0' + hh.toString()
+                    }
                 }
 
                 const end_time = year + month + date + 'T' + hh + mm + ss ;

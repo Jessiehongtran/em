@@ -4,7 +4,8 @@ export const rounds = [
         num: 7890,
         title: "My kids do not share with me",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        time: 1661970167605,
+        start_time: 1661970167605,
+        end_time: 1661970169405,
         link_to_join: "https://www.temporary-url.com/",
         participants: [
             {user_id: 1},
@@ -19,7 +20,8 @@ export const rounds = [
         num: 1234,
         title: "My daughter seems sad after school",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        time: 1661970167105,
+        start_time: 1661970167105,
+        end_time: 1661970168905,
         link_to_join: "https://www.temporary-url.com/",
         participants: [
             {user_id: 2},
@@ -32,7 +34,8 @@ export const rounds = [
         num: 1245,
         title: "It is so hard to get kids say thank you",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        time: 1661970167205,
+        start_time: 1661970167205,
+        end_time: 1661970169005,
         link_to_join: "https://www.temporary-url.com/",
         participants: [
             {user_id: 4},
@@ -44,7 +47,8 @@ export const rounds = [
         num: 1267,
         title: "My son does not listen to me",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        time: 1661970167305,
+        start_time: 1661970167305,
+        end_time: 1661970169105,
         link_to_join: "https://www.temporary-url.com/",
         participants: [
             {user_id: 2},
