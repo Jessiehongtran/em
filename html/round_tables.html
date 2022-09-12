@@ -60,7 +60,6 @@
 
                 if (searchValue.length > 0) {
                     const matchedRounds = rounds.filter(round => round.title.toLowerCase().includes(searchValue.toLowerCase()));
-                    console.log('matchedRounds', matchedRounds);
                     rounds_to_show = matchedRounds
                 } else {
                     rounds_to_show = rounds;
