@@ -111,7 +111,6 @@
 
             if (round_id) {
                 const the_round = rounds.filter(round => round.id === round_id)[0];
-                console.log(the_round);
                 title.innerHTML = the_round.title;
                 description.innerHTML = the_round.description;
                 time.innerHTML = convertTimeFromIntToString(the_round.start_time);
@@ -137,12 +136,8 @@
                     ss = '0' + ss
                 }
 
-                console.log('before', hh, mm);
-
                 const start_time = year + month + date + 'T' + hh + mm + ss ;
                 const durationInMin = (the_round.end_time - the_round.start_time)/60;
-
-                console.log('durationInMin', durationInMin);
                 
                 if (durationInMin < 60) {
                     mm = parseInt(mm) + durationInMin;
